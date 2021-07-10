@@ -9,7 +9,7 @@ function Header({StatisticsStore}){
 
     return (
         <div className="app-header">
-            {!StatisticsStore.loading && <p>{StatisticsStore?.selectedCountry?.countryCode}, {StatisticsStore?.selectedCountry?.countryName }</p>}
+            {!StatisticsStore.loading && <p>{StatisticsStore?.selectedCountry?.countryCode }  {StatisticsStore?.selectedCountry?.countryName }</p>}
             {StatisticsStore?.selectedCountry?.countryCode && <img src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/${StatisticsStore.selectedCountry.countryCode}.svg`} width={30}
   />}
 
