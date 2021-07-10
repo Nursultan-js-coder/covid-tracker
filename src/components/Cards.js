@@ -5,6 +5,7 @@ import {compose} from "recompose";
 import {inject, observer} from "mobx-react";
 import LoadingSpinner from "../components/common/spinner"
 import CountUp from "react-countup"
+import {nFormat} from "../utils"
 
 function Cards({StatisticsStore}){
     useEffect(()=>{
@@ -23,10 +24,11 @@ function Cards({StatisticsStore}){
                <Typography variant="h5" align="center" style={{color:"#777"}}>
                    <CountUp
                        start={0}
-                       end={StatisticsStore.totalConfirmed}
+                       end={nFormat(StatisticsStore.totalConfirmed)[0]}
                        duration={1.5}
                        separator="."
                    />
+                   {nFormat(StatisticsStore.totalConfirmed)[1]}
 
                </Typography>
                <Typography variant="h4"  align="center">Total</Typography>
@@ -39,10 +41,11 @@ function Cards({StatisticsStore}){
 
                         <CountUp
                             start={0}
-                            end={StatisticsStore.totalRecovered}
+                            end={nFormat(StatisticsStore.totalRecovered)[0]}
                             duration={1.5}
                             separator="."
                         />
+                        {nFormat(StatisticsStore.totalRecovered)[1]}
                     </Typography>
                     <Typography variant="h4" align="center">Total</Typography>
                 </CardContent></Card>
@@ -55,10 +58,12 @@ function Cards({StatisticsStore}){
 
                         <CountUp
                             start={0}
-                            end={StatisticsStore.totalDeaths}
+                            end={nFormat(StatisticsStore.totalDeaths)[0]}
                             duration={1.5}
                             separator="."
                         />
+                        {nFormat(StatisticsStore.totalDeaths)[1]}
+
                     </Typography>
 
                     <Typography variant="h4" align="center">Total</Typography>

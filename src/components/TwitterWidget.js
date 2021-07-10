@@ -7,7 +7,7 @@ function TwitterWidget() {
             <Timeline
                 dataSource={{
                     sourceType: "profile",
-                    screenName: "Apple"
+                    screenName: "samsung"
                 }}
                 options={{
                     height: "600"

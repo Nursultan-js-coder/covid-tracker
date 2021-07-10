@@ -1,6 +1,8 @@
 import React from "react";
 import { MapContainer, useMap, TileLayer, Circle, Popup } from "react-leaflet";
-import { nFormat } from "../../utils";
+import {compose} from "recompose";
+import {inject, observer} from "mobx-react";
+import {nFormat} from "../../utils";
 
 function SetViewOnClick({ coords, zoom }) {
     const map = useMap();
@@ -8,8 +10,8 @@ function SetViewOnClick({ coords, zoom }) {
 
     return null;
 }
-const Map = ({ data, lat, lng, zoom }) => {
-    return (
+const Map = ({StatisticsStore, data=StatisticsStore.topCountries, lat=10, lng=10, zoom=3 }) => {
+    return data ? (
         <div className="map">
             <MapContainer center={[lat, lng]}>
                 <TileLayer
@@ -73,7 +75,10 @@ const Map = ({ data, lat, lng, zoom }) => {
                 <SetViewOnClick coords={[lat, lng]} zoom={zoom} />
             </MapContainer>
         </div>
-    )
+    ) : null;
 };
 
-export default Map;
+export default compose(
+    inject('StatisticsStore')
+)(observer(Map))
+

@@ -15,20 +15,6 @@ const store= {
 
 function App() {
 
-    const request = axios.create({
-        baseURL:"https://api.coronatracker.com/v3/stats/worldometer",
-        responseType:"json"
-    })
-
-
-    useEffect(()=>{
-
-
-    },[])
-
-    const handleCountryChange=(countryCode)=>{
-        console.log(countryCode);
-    }
   return (
       <Provider {...store}>
     <div className="App">

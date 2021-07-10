@@ -33,6 +33,7 @@ class StatisticsStore{
             }))
             .finally(()=> {
             this.loading = false;
+                this.news()
             })
 
     }
@@ -74,7 +75,8 @@ class StatisticsStore{
     }
     news(countryCode,countryName){
         this.loading = true;
-        return apiClient.common.news(countryCode,countryName)
+
+        return apiClient.common.news(countryCode ?? "kg",countryName ?? "kyrgyzstan")
             .then((res)=>{
                 this.newsList = res.data.items;
                 console.log(this.newsList)

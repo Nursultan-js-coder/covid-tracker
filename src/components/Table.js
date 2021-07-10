@@ -7,10 +7,10 @@ import LoadingSpinner from "./common/spinner";
 
 function Table({StatisticsStore}){
     useEffect(()=>{
-        // StatisticsStore.getTopCountry();
+        StatisticsStore.getTopCountry();
         },[])
     const handleCountryChange = (countryCode,countryName)=>{
-        StatisticsStore.getDataCountry(countryCode,countryName)
+        StatisticsStore.getDataCountry(countryCode.toLowerCase(),countryName.toLowerCase())
         StatisticsStore.news(StatisticsStore.selectedCountry.countryCode,StatisticsStore.selectedCountry.countryName)
         console.log("Selected Country :",StatisticsStore.selectedCountry)
 

@@ -6,11 +6,11 @@ import {useEffect} from "react";
 function News({StatisticsStore}){
     useEffect(()=>{
         StatisticsStore.news(StatisticsStore?.selectedCountry?.countryCode,StatisticsStore?.selectedCountry?.countryName)
-    },[])
+    },[StatisticsStore.selectedCountry])
     return (
        <>
            {StatisticsStore.loading ? <LoadingSpinner/>:(
-               StatisticsStore?.newsList && StatisticsStore.newsList.map(singleNews=>{
+                StatisticsStore?.newsList?.map(singleNews=>{
                    return (
                        <Card>
                            <CardHeader>
