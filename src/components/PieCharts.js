@@ -3,13 +3,15 @@ import React from "react";
 import {Card, CardContent} from "@material-ui/core";
 import {compose} from "recompose";
 import {inject, observer} from "mobx-react";
+import {Skeleton} from "@material-ui/lab";
 
 function PieChart({StatisticsStore}) {
     return (
         <Card>
-            <CardContent>
-                {!StatisticsStore.loading &&
-                <Doughnut data={{
+                {StatisticsStore.loading ? <PieChartSkeleton/>: (
+                    <CardContent>
+
+                    <Doughnut data={{
                     labels: ["total recovered" , "total confirmed", "total deaths"],
                     datasets: [{
                         label: '# of Votes',
@@ -34,8 +36,7 @@ function PieChart({StatisticsStore}) {
                           options={{maintainAspectRatio: false}}
 
                 />
-                }
-        </CardContent>
+        </CardContent>)}
         </Card>
     )
 }
@@ -43,3 +44,14 @@ function PieChart({StatisticsStore}) {
 export default compose(
     inject('StatisticsStore')
 )(observer(PieChart))
+
+
+
+function PieChartSkeleton(){
+
+    return (
+        <Skeleton variant="rect" width={640} height={250} animation="wave">
+
+        </Skeleton>
+    )
+}
