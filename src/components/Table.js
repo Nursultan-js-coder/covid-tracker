@@ -1,60 +1,58 @@
 import {useEffect,useState} from "react";
-import {sortDesc} from "../utils";
+import {sortDeathRate, sortDesc} from "../utils";
 import {compose} from "recompose";
 import {inject, observer} from "mobx-react";
 import LoadingSpinner from "./common/spinner";
+import {Skeleton} from "@material-ui/lab";
+import TopCountries from "./TopCountries";
+
 
 
 function Table({StatisticsStore}){
     useEffect(()=>{
-        StatisticsStore.getTopCountry();
+        fillTable();
         },[])
-    const handleCountryChange = (countryCode,countryName)=>{
-        StatisticsStore.getDataCountry(countryCode.toLowerCase(),countryName.toLowerCase())
-        StatisticsStore.news(StatisticsStore.selectedCountry.countryCode,StatisticsStore.selectedCountry.countryName)
+
+    const fillTable = async()=>{
+        await StatisticsStore.getTopCountry();
+    }
+
+    const handleCountryChange = async (countryCode,countryName)=>{
+        await StatisticsStore.getDataCountry(countryCode.toLowerCase(),countryName.toLowerCase())
+        await StatisticsStore.news(StatisticsStore.selectedCountry.countryCode,StatisticsStore.selectedCountry.countryName)
         console.log("Selected Country :",StatisticsStore.selectedCountry)
 
     }
+
     return(
         <div className="table">
-        <table className="table">
-            <thead>
-            <tr>
+                    <table className="table">
+                        <thead>
+                        <tr>
+                            <th>Country Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                        <tbody>
+                        {StatisticsStore.loading ? <LoadingSpinner/> : (<TopCountries handleCountryChange={handleCountryChange}/>) }
+                        </tbody>
+                        </thead>
+                    </table>
 
-                <th>Country Name</th>
-                <th>Quantity</th>
-            </tr>
-            <tbody>
-            {StatisticsStore.loading ? (<LoadingSpinner/>): (StatisticsStore?.topCountries?.map((country,id)=>{
-                return (
-                    <tr>
-                        <td onClick={()=>handleCountryChange(country.countryCode,country.country)}>
-                            <img
-                                src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/${(country.countryCode
-                                        ? country.countryCode
-                                        : ""
-                                ).toLowerCase()}.svg`}
-                                width="20"
-                                style={{ paddingRight: "5px" }}
-                                alt="country-flag"
-                            />
-                            {country.country}
-                        </td>
-                        <td>
-                                <strong>{country.totalConfirmed.toLocaleString()}</strong>
-                        </td>
-                    </tr>
-                )
-            }))}
-            <tr>
-                <td></td>
-            </tr>
-            </tbody>
-            </thead>
-        </table>
+
             </div>
     )
 }
 export default compose(
     inject('StatisticsStore')
 )(observer(Table))
+
+function SkeletonTable(){
+
+    return (
+        <Skeleton variant="rect" width={300} height={600} animation="wave">
+
+        </Skeleton>
+    )
+}
+
+

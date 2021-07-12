@@ -1,6 +1,8 @@
 import {useState} from "react";
 import {action, makeAutoObservable, makeObservable,observable} from "mobx";
 import apiClient from "../api/apiClient"
+import {process,sortDescDeathRate} from "../utils"
+
 
 class StatisticsStore{
     dailyNewCases;
@@ -13,9 +15,13 @@ class StatisticsStore{
     newsList;
     loading = false ;
     selectedCountry;
+    deathRating;
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this,{
+            // topCountries:false,
+            // deathRating:false
+        })
     }
 
     getDataGlobal(){
@@ -45,7 +51,6 @@ class StatisticsStore{
         this.loading = true;
         return apiClient.common.fetchCountry(countryCode)
             .then(action((res)=>{
-                console.log(res.data[0])
                 this.dailyNewCases = res.data[0].dailyConfirmed;
                 this.dailyNewDeaths = res.data[0].dailyDeaths;
                 this.dailyNewRecoveries = this.dailyNewCases- this.dailyNewDeaths;
@@ -68,6 +73,8 @@ class StatisticsStore{
                 this.topCountries = res.data;
                 console.log(res.data)
                 console.log("getCountry is called")
+                this.deathRating = sortDescDeathRate(process(res.data,"death"));
+
             }))
             .finally(()=>{
                 this.loading = false;
@@ -84,6 +91,11 @@ class StatisticsStore{
             .finally(()=>{
                 this.loading = false;
             })
+    }
+    analytics(){
+
+
+
     }
 
 

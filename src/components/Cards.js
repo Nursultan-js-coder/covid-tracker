@@ -6,6 +6,7 @@ import {inject, observer} from "mobx-react";
 import LoadingSpinner from "../components/common/spinner"
 import CountUp from "react-countup"
 import {nFormat} from "../utils"
+import {Skeleton} from "@material-ui/lab";
 
 function Cards({StatisticsStore}){
     useEffect(()=>{
@@ -15,7 +16,7 @@ function Cards({StatisticsStore}){
 
     return (
             <>
-                { StatisticsStore.loading ? (<LoadingSpinner/>):(
+                { StatisticsStore.loading ? (<SkeletonCards/>):(
         <Grid container spacing={2}>
 
             <Grid item sm={4}>
@@ -80,3 +81,23 @@ function Cards({StatisticsStore}){
 export default compose(
     inject('StatisticsStore')
 )(observer(Cards))
+
+function SkeletonCards(){
+
+    return (
+        <Grid container spacing={2}>
+            <Grid item>
+                <Skeleton variant="rect" width={200} height={200} animation="wave"></Skeleton>
+
+            </Grid>
+            <Grid item>
+                <Skeleton variant="rect" width={200} height={200} animation="wave"></Skeleton>
+
+            </Grid>
+            <Grid item>
+                <Skeleton variant="rect" width={200} height={200} animation="wave"></Skeleton>
+
+            </Grid>
+        </Grid>
+    )
+}
