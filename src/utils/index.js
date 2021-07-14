@@ -54,3 +54,6 @@ export const sortDeathRate = (data) => {
 
   return sortedData.sort((a, b) => (a.totalDeaths/a.totalConfirmed > b.totalDeaths/b.totalConfirmed ? -1 : 1));
 };
+
+
+

@@ -5,17 +5,17 @@ import {process,sortDescDeathRate} from "../utils"
 
 
 class StatisticsStore{
-    dailyNewCases;
-    dailyNewDeaths;
-    dailyNewRecoveries;
-    totalConfirmed;
-    totalRecovered;
-    totalDeaths;
-    topCountries;
-    newsList;
+    dailyNewCases = undefined;
+    dailyNewDeaths = undefined;
+    dailyNewRecoveries = undefined;
+    totalConfirmed = undefined;
+    totalRecovered = undefined;
+    totalDeaths = undefined;
+    topCountries ;
+    newsList = undefined;
     loading = false ;
-    selectedCountry;
-    deathRating;
+    selectedCountry = undefined;
+    deathRating = undefined;
 
     constructor() {
         makeAutoObservable(this,{
