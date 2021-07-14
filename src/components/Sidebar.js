@@ -3,7 +3,7 @@ import TwitterWidget from "./TwitterWidget";
 import Table from "./Table.js"
 import {compose} from "recompose";
 import {inject, observer} from "mobx-react";
-import  Map from "./map/Map"
+import MyMap from "./map/MyMap";
 
 function Sidebar({StatisticsScore}){
     return (
@@ -18,11 +18,13 @@ function Sidebar({StatisticsScore}){
                     >
                     <Grid item>
                         <Grid item >
-                            <Map/>
+                            <MyMap/>
+                        </Grid>
+                        <Grid item >
                             <Table />
                         </Grid>
                     </Grid>
-<TwitterWidget/>
+                        <TwitterWidget/>
                     </Grid>
 
                 </CardContent>
