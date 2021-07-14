@@ -11,7 +11,7 @@ class StatisticsStore{
     totalConfirmed = undefined;
     totalRecovered = undefined;
     totalDeaths = undefined;
-    topCountries ;
+    topCountries = undefined;
     newsList = undefined;
     loading = false ;
     selectedCountry = undefined;
