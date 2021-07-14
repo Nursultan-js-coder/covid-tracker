@@ -47,7 +47,7 @@ function MyMap({StatisticsStore}) {
     layer.bindPopup(countryName);
     let rate = StatisticsStore.topCountries.find((c)=>countryName === c?.countryName)?.totalConfirmed ?? 0;
     let opacity = getStyle(parseInt(rate))
-    console.log(rate);
+    // console.log(rate);
     console.log(opacity);
     layer.options.fillOpacity = opacity; //0-1 (0.1, 0.2, 0.3)
     // const colorIndex = Math.floor(Math.random() * this.colors.length);
